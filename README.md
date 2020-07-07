@@ -1,2 +1,2 @@
-# WebApplication_with_Flask_and_Jinja
+# WebApplication_using_Flask_and_Jinja
 FlaskとJinjaを利用したタイタニックの生存予測を行うWebアプリケーション
