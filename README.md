@@ -1,0 +1,2 @@
+# titanic_prediction_WebApplication_with_Flask_and_Jinja
+FlaskとJinjaを利用したタイタニックの生存予測を行うWebアプリケーション
