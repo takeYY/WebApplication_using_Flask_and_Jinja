@@ -1,0 +1,118 @@
+{% extends "layout.html" %}
+{% block content %}
+<!-- Form
+  ================================================== -->
+<div class="form">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <p class="lead">
+          {% if name %}
+            こんにちは {{ name }} さん
+            {% else %}
+              {% if message %}
+                {{ message }}
+              {% else %}
+                こんにちはJohn Doeさん
+              {% endif%}
+          {% endif %}
+        </p>
+        <form action="/post" method="post">
+          <p>
+            <label for="name">名前：　</label>
+            <input type="text" name="name" id="name" placeholder="名前を入力"/>
+          </p>
+          <p>
+            <label for="Sex">性別：　</label>
+            <input type="radio" name="Sex" value="male" checked="checked">男性
+            <input type="radio" name="Sex" value="female">女性
+            <input type="radio" name="Sex" value="nothing">性別とかないよ
+          </p>
+          <p>
+            <label for="Age">年齢：　</label>
+            <select name="Age">
+              {% for i in range(1,101) %}
+              <option value={{i}}>{{i}}歳</option>
+              {% endfor %}
+            </select>
+          </p>
+          <p>
+            <label for="PClass">貧富：　</label>
+            <input type="radio" name="PClass" value="1" checked="checked">裕福
+            <input type="radio" name="PClass" value="2">普通
+            <input type="radio" name="PClass" value="3">貧困
+          </p>
+          <p>
+            <label for="Title">あなたの敬称：　</label>
+            <select name="Title">
+              <option value="Mr">何者でもない男性</option>
+              <option value="Mrs">既婚女性</option>
+              <option value="Ms">独身女性</option>
+              <option value="Master">主人</option>
+              <option value="Dr">医者</option>
+              <option value="Rev">牧師</option>
+              <option value="Col">大佐</option>
+              <option value="Major">少佐</option>
+              <option value="Mlle">婦女</option>
+              <option value="Jonkheer">貴族</option>
+              <option value="the Countess">伯爵夫人</option>
+              <option value="Lady">お嬢様</option>
+              <option value="Capt">船長</option>
+              <option value="Sir">敬意のある男性</option>
+            </select>
+          </p>
+          <p>
+            <label for="SibSp">兄弟や配偶者もタイタニック号に乗せる人数：　</label>
+            <select name="SibSp">
+              {% for i in range(6) %}
+              <option value={{i}}>{{i}}人</option>
+              {% endfor %}
+            </select>
+          </p>
+          <p>
+            <label for="Parch">家族や子供もタイタニック号に乗せる人数：　</label>
+            <select name="Parch">
+              {% for i in range(6) %}
+              <option value={{i}}>{{i}}人</option>
+              {% endfor %}
+            </select>
+          </p>
+          <button type="submit" class="btn btn-primary">送信する</button>
+          <p>
+            {% if accuracy %}
+              <hr>
+              {% if pred == 0 %}
+              残念ながら{{name}}さんは助からないでしょう...。
+              {% else %}
+              おめでとうございます！{{name}}さんは助かります！
+              {% endif %}
+              <br>予測精度は{{accuracy}}%です！
+              <hr>
+              {{name}}さんの情報
+              <br>
+              性別：{{data.Sex}}
+              <br>
+              年齢：{{data.Age}}歳
+              <br>
+              貧富：
+              {% if data.Pclass == 1 %}
+                裕福
+              {% elif data.Pclass == 2 %}
+                普通
+              {% else %}
+                貧困
+              {% endif %}
+              <br>
+              敬称：{{Title}}
+              <br>
+              兄弟/配偶者の人数：{{data.SibSp}}
+              <br>
+              家族/子供の人数：{{data.Parch}}
+            {% endif %}
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
